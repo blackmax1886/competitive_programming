@@ -5,7 +5,7 @@ def getInts():
     return map(int, input().split())
 
 def getIntsArray():
-    return list(map(int, input().split()))
+    return [int(x) for x in input().split()]
 
 # get vertical input of ints as array
 def getIntsVArray(N):
