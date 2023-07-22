@@ -15,5 +15,8 @@ def find_first_index(lst, condition):
 def max_index_le_threshold(lst, value):
     return next((i for i in reversed(range(len(lst))) if lst[i] <= value), None)
 
+def max_index_ge_threshold(lst, value):
+    return next((i for i in reversed(range(len(lst))) if lst[i] >= value), None)
+
 def sum_last_column(matrix):
     return sum(row[-1] for row in matrix)
