@@ -12,7 +12,7 @@ def find_indices_2d(data, target):
 def find_first_index(lst, condition):
     return next((i for i, x in enumerate(lst) if condition(x)), None)
 
-def max_index_below_threshold(lst, value):
+def max_index_le_threshold(lst, value):
     return next((i for i in reversed(range(len(lst))) if lst[i] <= value), None)
 
 def sum_last_column(matrix):
