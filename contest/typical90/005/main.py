@@ -16,7 +16,7 @@ def getIntsArray():
 #     return result
 
 def matrix_power_mod(matrix, k, mod):
-    result = np.identity(len(matrix), dtype=int)
+    result = np.identity(len(matrix), dtype='object')
     while k > 0:
         if (k % 2) == 1: result = result @ matrix % mod
         matrix = (matrix @ matrix) % mod
@@ -41,23 +41,23 @@ i: 0(1?) to N
 j: 0 to B-1
 '''
 
-dp = [[0 for _ in range(B)] for _ in range(N+1)]
-dp[0][0] = 1
-for i in range(N):
-    for j in range(B):
-        for k in chars:
-            remainder = (10*j + k) % B
-            dp[i+1][remainder] += dp[i][j]
-print(dp[N][0] % mod)
+# dp = [[0 for _ in range(B)] for _ in range(N+1)]
+# dp[0][0] = 1
+# for i in range(N):
+#     for j in range(B):
+#         for k in chars:
+#             remainder = (10*j + k) % B
+#             dp[i+1][remainder] += dp[i][j]
+# print(dp[N][0] % mod)
 
 # 遷移行列を計算する
 # i行j列目の要素は余りjから余りiへの遷移がいくつあるか
-# transition_matrix = [[0 for _ in range(B)] for _ in range(B)]
-# for b in range(B):
-#     for k in chars:
-#         remainder = (10*b + k) % B
-#         transition_matrix[remainder][b] += 1
-# nd_transion_matrix = np.array(transition_matrix)
+transition_matrix = [[0 for _ in range(B)] for _ in range(B)]
+for b in range(B):
+    for k in chars:
+        remainder = (10*b + k) % B
+        transition_matrix[remainder][b] += 1
+nd_transion_matrix = np.array(transition_matrix,dtype='object')
 
 # 遷移行列のn乗を繰り返し二乗法で求める
 # msb_exponent = len(bin(N)) - 3
@@ -67,10 +67,8 @@ print(dp[N][0] % mod)
 #     power_of_transition_mat.append(np.linalg.matrix_power(nd_transion_matrix,p))
 
 # そもそもnumpy.linalg.matrix_powerが繰り返し二乗法で実装されてるっぽいからそのまま使えばよいか
-# init_state = [0] * B
-# init_state[0] = 1
-# result = np.dot(matrix_power_mod(nd_transion_matrix,N, mod),init_state)
-# # result = np.dot(np.linalg.matrix_power(nd_transion_matrix,N), init_state)
-# print(result[0] % mod)
-# init = np.array([1,0,0])
-# print(np.dot(x,init))
+init_state = np.zeros(B, dtype='object')
+init_state[0] = 1
+result = np.dot(matrix_power_mod(nd_transion_matrix,N, mod),init_state)
+# result = np.dot(np.linalg.matrix_power(nd_transion_matrix,N), init_state)
+print(int(result[0] % mod))
