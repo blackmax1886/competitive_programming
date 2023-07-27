@@ -26,3 +26,9 @@ def getIntsMatrix(N):
     for _ in range(N):
         mat.append(list(map(int, input().split())))
     return mat
+
+def getStrMatrix(N):
+    mat = []
+    for _ in range(N):
+        mat.append(list(input().split()))
+    return mat
